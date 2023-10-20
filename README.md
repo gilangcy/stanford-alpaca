@@ -23,8 +23,9 @@ Our initial release contains the data generation procedure, dataset, and trainin
 
 [2]: Self-Instruct: Aligning Language Model with Self Generated Instructions. Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, Noah A. Smith, Daniel Khashabi, Hannaneh Hajishirzi. https://arxiv.org/abs/2212.10560
 
-# dataset
-We using the dataset from Chat Doctor 5K, 
+# Dataset
+We using the 5k generated dataset by [Chat Doctor](https://github.com/Kent0n-Li/ChatDoctor). The dataset is a generated conversations between patients and physicians from ChatGPT GenMedGPT-5k and disease database. 
+
 [`alpaca_data.json`](./alpaca_data.json) contains 5K instruction-following data we used for fine-tuning the Alpaca model.
 This JSON file is a list of dictionaries, each dictionary contains the following fields:
 
@@ -61,7 +62,7 @@ We used the following prompts for fine-tuning the Alpaca model:
 
  During inference (eg for the web demo), we use the user instruction with an empty input field (second option).
 
-## Data Preparation Process
+Data Preparation Process
 
 <details>
 <summary> <strong> Running the code </strong> </summary>
@@ -165,88 +166,20 @@ torchrun --nproc_per_node=4 --master_port=<your_random_port> train.py \
 Note the given training script is meant to be simple and easy to use, and is not particularly optimized.
 To run on more gpus, you may prefer to turn down `gradient_accumulation_steps` to keep a global batch size of 128. Global batch size has not been tested for optimality.
 
-### Addressing OOM
+## Demo 
 
-Naively, fine-tuning a 7B model requires about 7 x 4 x 4 = 112 GB of VRAM. Commands given above enable parameter sharding, so no redundant model copy is stored on any GPU.
-If you'd like to further reduce the memory footprint, here are some options:
-
-- Turn on CPU offload for FSDP with `--fsdp "full_shard auto_wrap offload"`. This saves VRAM at the cost of longer runtime.
-- In our experience, DeepSpeed stage-3 (with offload) can at times be more memory efficient than FSDP with offload. Here's an example to use DeepSpeed stage-3 with 4 GPUs with both parameter and optimizer offload:
-    ```bash
-    pip install deepspeed
-    torchrun --nproc_per_node=4 --master_port=<your_random_port> train.py \
-        --model_name_or_path <your_path_to_hf_converted_llama_ckpt_and_tokenizer> \
-        --data_path ./alpaca_data.json \
-        --bf16 True \
-        --output_dir <your_output_dir> \
-        --num_train_epochs 3 \
-        --per_device_train_batch_size 4 \
-        --per_device_eval_batch_size 4 \
-        --gradient_accumulation_steps 8 \
-        --evaluation_strategy "no" \
-        --save_strategy "steps" \
-        --save_steps 2000 \
-        --save_total_limit 1 \
-        --learning_rate 2e-5 \
-        --weight_decay 0. \
-        --warmup_ratio 0.03 \
-        --deepspeed "./configs/default_offload_opt_param.json" \
-        --tf32 True
-    ```
-  - The DeepSpeed library also provides some [helpful functions](https://deepspeed.readthedocs.io/en/latest/memory.html) to estimate memory usage. 
-- [LoRA](https://arxiv.org/abs/2106.09685) fine-tunes low-rank slices of the query, key, and value embedding heads. This can reduce the total memory footprint from 112GB to about 7x4=28GB. We may release our re-implemention of this in the future, but for now the [peft](https://github.com/huggingface/peft) codebase can be a useful resource.
-
-## Recovering Alpaca Weights
-
-The weight diff between Alpaca-7B and LLaMA-7B is located [here](https://huggingface.co/tatsu-lab/alpaca-7b-wdiff/tree/main).
-To recover the original Alpaca-7B weights, follow these steps:
-```text
-1. Convert Meta's released weights into huggingface format. Follow this guide:
-    https://huggingface.co/docs/transformers/main/model_doc/llama
-2. Make sure you cloned the released weight diff into your local machine. The weight diff is located at:
-    https://huggingface.co/tatsu-lab/alpaca-7b/tree/main
-3. Run this function with the correct paths. E.g.,
-    python weight_diff.py recover --path_raw <path_to_step_1_dir> --path_diff <path_to_step_2_dir> --path_tuned <path_to_store_recovered_weights>
-```
-
-Once step 3 completes, you should have a directory with the recovered weights, from which you can load the model like the following
-
-```python
-import transformers
-alpaca_model = transformers.AutoModelForCausalLM.from_pretrained("<path_to_store_recovered_weights>")
-alpaca_tokenizer = transformers.AutoTokenizer.from_pretrained("<path_to_store_recovered_weights>")
-```
+ddsds
 
 ### Authors
 
-All grad students below contributed equally and the order is determined by random draw.
+All interns below contributed equally and the order is determined by random draw.
 
-- [Rohan Taori](https://www.rohantaori.com/)
-- [Ishaan Gulrajani](https://ishaan.io/)
-- [Tianyi Zhang](https://tiiiger.github.io/)
-- [Yann Dubois](https://yanndubs.github.io/)
-- [Xuechen Li](https://www.lxuechen.com/)
+- [Denny]()
+- [Fadli]()
+- [Gilang Catur Yudishtira]()
 
-All advised by [Tatsunori B. Hashimoto](https://thashim.github.io/). Yann is also advised by [Percy Liang](https://cs.stanford.edu/~pliang/) and Xuechen is also advised by [Carlos Guestrin](https://guestrin.su.domains/).
+All advised by [Firqa]()
 
-### Citation
-
-Please cite the repo if you use the data or code in this repo.
-
-```
-@misc{alpaca,
-  author = {Rohan Taori and Ishaan Gulrajani and Tianyi Zhang and Yann Dubois and Xuechen Li and Carlos Guestrin and Percy Liang and Tatsunori B. Hashimoto },
-  title = {Stanford Alpaca: An Instruction-following LLaMA model},
-  year = {2023},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/tatsu-lab/stanford_alpaca}},
-}
-```
-
-Naturally, you should also cite the original LLaMA paper [1] and the Self-Instruct paper [2].
 
 ### Acknowledgements
 
-We thank Yizhong Wang for his help in explaining the data generation pipeline in Self-Instruct and providing the code for the parse analysis plot.
-We thank Yifan Mai for helpful support, and members of the Stanford NLP Group as well as the Center for Research on Foundation Models (CRFM) for their helpful feedback.
