@@ -1,27 +1,10 @@
-
-<p align="center" width="100%">
-<img src="assets/logo.png" alt="Stanford-Alpaca" style="width: 50%; min-width: 300px; display: block; margin: auto;">
-</p>
-
-# Stanford Alpaca: An Instruction-following LLaMA Model
-
-[![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE)
-[![Data License](https://img.shields.io/badge/Data%20License-CC%20By%20NC%204.0-red.svg)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/DATA_LICENSE)
-[![Weight Diff License](https://img.shields.io/badge/Weight%20Diff%20License-CC%20By%20NC%204.0-yellow)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/WEIGHT_DIFF_LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
+# [Reproducing] Stanford Alpaca: An Instruction-following LLaMA Model
 This is the repo for reproducing Stanford Alpaca : An Instruction-following LLaMA Model . The repo contains:
 
 - The [5K data](#dataset) used for fine-tuning the model.
 - The code for [preparation data](#data-preparation).
 - The code for [fine-tuning the model](#fine-tuning).
-- The code for [demo](#demo).
-
-Note: We thank the community for feedback on Stanford-Alpaca and supporting our research. Our live demo is suspended until further notice.
-
-**Usage and License Notices**: Alpaca is intended and licensed for research use only. The dataset is CC BY NC 4.0 (allowing only non-commercial use) and models trained using the dataset should not be used outside of research purposes. 
-The weight diff is also CC BY NC 4.0 (allowing only non-commercial use).
+- The link for [demo](#demo).
 
 ## Overview
 
@@ -40,9 +23,9 @@ Our initial release contains the data generation procedure, dataset, and trainin
 
 [2]: Self-Instruct: Aligning Language Model with Self Generated Instructions. Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, Noah A. Smith, Daniel Khashabi, Hannaneh Hajishirzi. https://arxiv.org/abs/2212.10560
 
-## Data Release
-
-[`alpaca_data.json`](./alpaca_data.json) contains 52K instruction-following data we used for fine-tuning the Alpaca model.
+# dataset
+We using the dataset from Chat Doctor 5K, 
+[`alpaca_data.json`](./alpaca_data.json) contains 5K instruction-following data we used for fine-tuning the Alpaca model.
 This JSON file is a list of dictionaries, each dictionary contains the following fields:
 
 - `instruction`: `str`, describes the task the model should perform. Each of the 52K instructions is unique.
@@ -78,7 +61,7 @@ We used the following prompts for fine-tuning the Alpaca model:
 
  During inference (eg for the web demo), we use the user instruction with an empty input field (second option).
 
-## Data Generation Process
+## Data Preparation Process
 
 <details>
 <summary> <strong> Running the code </strong> </summary>
