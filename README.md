@@ -1,5 +1,5 @@
 # [Reproducing] Stanford Alpaca: An Instruction-following LLaMA Model
-This is the repo for reproducing Stanford Alpaca : An Instruction-following LLaMA Model . The repo contains:
+This is the repo for reproducing Stanford Alpaca : An Instruction-following LLaMA Model. The repo contains:
 
 - The [5K data](#dataset) used for fine-tuning the model.
 - The code for [preparation data](#data-preparation).
@@ -174,11 +174,11 @@ ddsds
 
 All interns below contributed equally and the order is determined by random draw.
 
-- [Denny]()
-- [Fadli]()
-- [Gilang Catur Yudishtira]()
+- [Denny Andriana Wahyu](https://www.linkedin.com/in/denny-aw/)
+- [Fadli Aulawi Al Ghiffari](https://www.linkedin.com/in/fadli-aulawi-al-ghiffari-9b4990148/)
+- [Gilang Catur Yudishtira](https://www.linkedin.com/in/gilangcy/)
 
-All advised by [Firqa]()
+All advised by [Firqa Aqilla Noor Arasyi](https://www.linkedin.com/in/firqaana/)
 
 
 ### Acknowledgements
