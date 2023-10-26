@@ -24,8 +24,9 @@ Our initial release contains the data generation procedure, dataset, and trainin
 [2]: Self-Instruct: Aligning Language Model with Self Generated Instructions. Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, Noah A. Smith, Daniel Khashabi, Hannaneh Hajishirzi. https://arxiv.org/abs/2212.10560
 
 # Dataset
-We using the 5k generated dataset by [Chat Doctor](https://github.com/Kent0n-Li/ChatDoctor). The dataset is a generated conversations between patients and physicians from ChatGPT GenMedGPT-5k and disease database. 
+We using the 5k generated dataset by [Chat Doctor](https://github.com/Kent0n-Li/ChatDoctor). The dataset is a generated conversations between patients and physicians from ChatGPT GenMedGPT-5k and disease database. Dataset also currated and modified to Indonesian Language Based. 
 
+That dataset modified and to Indonesian based languague
 [`alpaca_data.json`](./alpaca_data.json) contains 5K instruction-following data we used for fine-tuning the Alpaca model.
 This JSON file is a list of dictionaries, each dictionary contains the following fields:
 
@@ -168,7 +169,11 @@ To run on more gpus, you may prefer to turn down `gradient_accumulation_steps` t
 
 ## Demo 
 
-ddsds
+These are link for test the fine-tuned model :
+
+1. [Polylm-7B](https://huggingface.co/spaces/dennyaw/polylm1.7b)
+2. [Llama-2-7B](https://huggingface.co/spaces/dennyaw/Llama-2-7b-finetuned)
+3. [Internlm-7B](https://huggingface.co/spaces/dennyaw/internlm-7b-finetuned)
 
 ### Authors
 
