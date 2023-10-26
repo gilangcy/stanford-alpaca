@@ -37,5 +37,3 @@ All interns below contributed equally and the order is determined by random draw
 All advised by [Firqa Aqilla Noor Arasyi](https://www.linkedin.com/in/firqaana/)
 
 
-### Acknowledgements
-
