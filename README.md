@@ -1,10 +1,10 @@
 # [Reproducing] Stanford Alpaca: An Instruction-following LLaMA Model
-This is the repo for reproducing Stanford Alpaca : An Instruction-following LLaMA Model. The repo contains:
+This is the repo for reproducing [Stanford Alpaca : An Instruction-following LLaMA Model](https://github.com/tatsu-lab/stanford_alpaca/blob/main/README.md). The repo contains:
 
-- The [5K data](#dataset) used for fine-tuning the model.
+- The [5K data](##dataset) conversations between patients and physicians used for fine-tuning the model.
 - The code for [preparation data](#data-preparation).
-- The code for [fine-tuning the model](#fine-tuning).
-- The link for [demo](#demo).
+- The code for [Fine Tuning the Model](#fine-tuning).
+- The link for [Testing the Model](#testing-the-model).
 
 ## Overview
 
@@ -23,7 +23,7 @@ Our initial release contains the data generation procedure, dataset, and trainin
 
 [2]: Self-Instruct: Aligning Language Model with Self Generated Instructions. Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, Noah A. Smith, Daniel Khashabi, Hannaneh Hajishirzi. https://arxiv.org/abs/2212.10560
 
-# Dataset
+## Dataset
 We using the 5k generated dataset by [Chat Doctor](https://github.com/Kent0n-Li/ChatDoctor). The dataset is a generated conversations between patients and physicians from ChatGPT GenMedGPT-5k and disease database. Dataset also currated and modified to Indonesian Language Based. 
 
 That dataset modified and to Indonesian based languague
@@ -167,7 +167,11 @@ torchrun --nproc_per_node=4 --master_port=<your_random_port> train.py \
 Note the given training script is meant to be simple and easy to use, and is not particularly optimized.
 To run on more gpus, you may prefer to turn down `gradient_accumulation_steps` to keep a global batch size of 128. Global batch size has not been tested for optimality.
 
-## Demo 
+## Finetuning the Model
+
+We finetuning the model based the Stanford Alpaca. We try to finetune
+
+## Testing the Model 
 
 These are link for test the fine-tuned model :
 
