@@ -1,7 +1,7 @@
 # [Reproducing] Stanford Alpaca: An Instruction-following LLaMA Model
 This is the repo for reproducing [Stanford Alpaca : An Instruction-following LLaMA Model](https://github.com/tatsu-lab/stanford_alpaca/blob/main/README.md). The repo contains:
 
-- The [5K data](##dataset) conversations between patients and physicians used for fine-tuning the model.
+- The [5K data](#dataset) conversations between patients and physicians used for fine-tuning the model.
 - The code for [preparation data](#data-preparation).
 - The code for [Fine Tuning the Model](#fine-tuning).
 - The link for [Testing the Model](#testing-the-model).
